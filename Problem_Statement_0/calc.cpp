@@ -67,7 +67,7 @@ int main()
                     numm = numm + c;
                 }
             }
-            num = stoll(numm);
+            num = stold(numm);
 
             if (expression == "sqrt")
             {
@@ -94,15 +94,21 @@ int main()
                 {
                     numstr = numstr + c;
                 }
+                else if (c == '.')
+                {
+                    numstr = numstr + c;
+                }
                 else if (c == '+' || c == '-' || c == '=' || c == '*' || c == '/')
                 {
-                    numbers.push_back(stoll(numstr));
+                    numbers.push_back(stold(numstr));
                     ops.push_back(c);
                     numstr = "";
                 }
             }
             ops.pop_back();
 
+
+            // vectors to answer
             long double ans = numbers[0];
 
             for (int i = 0; i < ops.size(); i++)
