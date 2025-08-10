@@ -5,6 +5,30 @@
 
 using namespace std;
 
+double ln(double a) {
+    int terms = 30000;
+    double y = (a - 1) / (a + 1);
+    double yPower = y;
+    double result = 0.0;
+
+    for (int n = 1; n <= terms; n += 2) {
+        result += yPower / n;
+        yPower = yPower * y * y;
+    }
+    return 2 * result;
+}
+
+double exponential(double x) {
+    int terms = 30000;
+    double result = 1.0;
+    double term = 1.0;
+    for (int i = 1; i <= terms; i++) {
+        term *= x / i;
+        result += term;
+    }
+    return result;
+}
+
 double sqrt(double n)
 {
     int precision = 6;
@@ -49,35 +73,63 @@ int main()
         string exp;
         cout << "-->";
         getline(cin, exp);
-
-        if (exp[0] == 's')
-        {
-            string expression;
-            string numm;
-            double num;
-
+        if(exp.substr(0,2) == "ln"){
+            string expln;
+            string numinle;
+            double numinln;
+          
             for (char c : exp)
             {
-                if (c == 's' || c == 'q' || c == 'r' || c == 't')
+                if (c == 'l' || c == 'n')
                 {
-                    expression = expression + c;
+                    expln = expln + c;
                 }
                 else
                 {
-                    numm = numm + c;
+                    numinle = numinle + c;
                 }
             }
-            num = stold(numm);
-
-            if (expression == "sqrt")
+            numinln = stold(numinle);
+            if (expln == "ln")
             {
-                if (num < 0)
+                if (numinln < 0)
                 {
                     cout << "Error" << endl;
                 }
                 else
                 {
-                    cout << sqrt(num) << endl;
+                    cout << ln(numinln) << endl;
+                }
+            }
+        }
+         else if (exp.substr(0,4) == "sqrt")
+        {
+            string expsqrt;
+            string numinroot;
+            double numinsqrt;
+
+            for (char c : exp)
+            {
+                if (c == 's' || c == 'q' || c == 'r' || c == 't')
+                {
+                    expsqrt = expsqrt + c;
+                }
+                else
+                {
+                    numinroot = numinroot + c;
+                }
+            }
+            numinsqrt = stold(numinroot);
+
+            if (expsqrt == "sqrt")
+            {
+                if (numinsqrt < 0)
+                {
+                    cout << "Error" << endl;
+                }
+                else
+                {
+                    cout << sqrt(numinsqrt) << endl;
                 }
             }
         }
