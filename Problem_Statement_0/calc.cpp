@@ -18,6 +18,11 @@ double ln(double a) {
     return 2 * result;
 }
 
+double log(double a){
+double result= ln(a)/ln(10);
+return result;
+}
+
 double exponential(double x) {
     int terms = 30000;
     double result = 1.0;
@@ -73,7 +78,37 @@ int main()
         string exp;
         cout << "-->";
         getline(cin, exp);
-        if(exp.substr(0,2) == "ln"){
+
+        if(exp.substr(0,3) == "log"){
+            string explog;
+            string numinl10;
+            double numinlog;
+          
+            for (char c : exp)
+            {
+                if (c == 'l' || c == 'o'|| c == 'g')
+                {
+                    explog = explog + c;
+                }
+                else
+                {
+                    numinl10 = numinl10 + c;
+                }
+            }
+            numinlog = stold(numinl10);
+            if (explog == "log")
+            {
+                if (numinlog < 0)
+                {
+                    cout << "Error" << endl;
+                }
+                else
+                {
+                    cout << log(numinlog) << endl;
+                }
+            }
+        }
+        else if(exp.substr(0,2) == "ln"){
             string expln;
             string numinle;
             double numinln;
