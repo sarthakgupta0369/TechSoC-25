@@ -34,6 +34,10 @@ double exponential(double x) {
     return result;
 }
 
+double Pow(double base, double exponent) {
+    return exponential(exponent * ln(base));
+}
+
 double sqrt(double n)
 {
     int precision = 6;
@@ -177,7 +181,7 @@ int main()
 
             for (char c : ex)
             {
-                if (c != '+' && c != '-' && c != '=' && c != '*' && c != '/')
+                if (c != '+' && c != '-' && c != '=' && c != '*' && c != '/'&& c!= '^')
                 {
                     numstr = numstr + c;
                 }
@@ -185,7 +189,7 @@ int main()
                 {
                     numstr = numstr + c;
                 }
-                else if (c == '+' || c == '-' || c == '=' || c == '*' || c == '/')
+                else if (c == '+' || c == '-' || c == '=' || c == '*' || c == '/'|| c== '^')
                 {
                     numbers.push_back(stold(numstr));
                     ops.push_back(c);
@@ -215,6 +219,10 @@ int main()
                 else if (ops[i] == '/')
                 {
                     ans = ans / numbers[i + 1];
+                }
+                else if (ops[i] == '^')
+                {
+                    ans = Pow(ans , numbers[i + 1]);
                 }
             }
             cout << ans << endl;
